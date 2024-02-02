@@ -6,12 +6,14 @@ public class Pokemon {
     protected int entrada;
     protected String cadena; //naturaleza: Timido, Energetico, Misterioso.
     protected boolean atrapado; //validacion y pokebola.
+    protected Pokeball mostrar; //lama otra clase 
 
-    public Pokemon(String nombre, int entrada, String cadena, boolean atrapado) {
+    public Pokemon(String nombre, int entrada, String cadena, boolean atrapado, Pokeball mostrar) {
         this.nombre = nombre;
         this.entrada = entrada;
         this.cadena = cadena;
-        this.atrapado = false;
+        this.atrapado = atrapado;
+        this.mostrar = mostrar;
     }
 
     public String getNombre() {
@@ -48,7 +50,6 @@ public class Pokemon {
 
     @Override
     public String toString() {
-        return "Pokemon: \n" + "\nNombre: " + nombre + "\nEntrada: " + entrada + "\nCadena:" + cadena + "\nAtrapado: " + atrapado;
+        return "Pokemon: \n" + "\nNombre: " + nombre + "\nEntrada: " + entrada + "\nCadena:" + cadena + "\nAtrapado: " + atrapado + "\nMostrar=" + mostrar;
     }
-
 }
