@@ -44,7 +44,11 @@ public class GrassType extends Pokemon {
     }
 
     public void setDominio(int dominio) {
-        this.dominio = dominio;
+        if (dominio >= 0 && dominio <= 100) {
+            this.dominio = dominio;
+        } else {
+            System.out.println("Tiene que estar entre 0 y 100");
+        }
     }
 
     public void setNombre(String nombre) {

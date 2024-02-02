@@ -27,8 +27,17 @@ public class Pokemon {
         return cadena;
     }
 
-    public boolean isAtrapado() {
-        return atrapado;
+    public void setAtrapado(boolean atrapado, Pokeball pokebola) {
+        if (!this.atrapado) {
+            this.atrapado = atrapado;
+            if (atrapado) {
+                this.pokebola = pokebola; // Asigna la Pokebola solo si el Pokemon esta atrapado
+            } else {
+                this.pokebola = null; // Si no esta atrapado, asigna la Pokebola como null
+            }
+        } else {
+            System.out.println("No hay ningun pokemos atrapado.");
+        }
     }
 
     public void setNombre(String nombre) {
