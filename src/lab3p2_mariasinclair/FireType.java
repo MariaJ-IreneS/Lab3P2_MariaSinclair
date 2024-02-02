@@ -1,15 +1,13 @@
 package lab3p2_mariasinclair;
 
-public class FireType extends Pokemon{
-   
-    private int potencia; 
+public class FireType extends Pokemon {
+
+    private int potencia;
 
     public FireType(String nombre, int entrada, String cadena, boolean atrapado, int potencia) {
         super(nombre, entrada, cadena, atrapado);
-        this.potencia=potencia; 
+        this.potencia = potencia;
     }
-    
-   
 
     public int getPotencia() {
         return potencia;
@@ -31,7 +29,6 @@ public class FireType extends Pokemon{
         return atrapado;
     }
 
-    
     public void setPotencia(int potencia) {
         this.potencia = potencia;
     }
@@ -52,13 +49,9 @@ public class FireType extends Pokemon{
         this.atrapado = atrapado;
     }
 
-    
     @Override
     public String toString() {
-        return "FireType:\n" + "\nPotencia=" + potencia;
+        return super.toString() + "\nPotencia=" + potencia;
     }
 
-    
-    
-    
 }

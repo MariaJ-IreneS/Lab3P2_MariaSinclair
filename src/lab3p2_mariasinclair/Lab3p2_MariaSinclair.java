@@ -34,7 +34,7 @@ public class Lab3p2_MariaSinclair {
                     break;
 
                 case 3:
-
+                    listarPokemonPorTipo();
                     break;
 
                 case 4:
@@ -144,11 +144,26 @@ public class Lab3p2_MariaSinclair {
                     System.out.println("La eficiencia debe estar entre 1 y 3. Intente nuevamente.");
                 }
             } else {
-                System.out.println("Ingrese un número valido.");
+                System.out.println("Ingrese un numero valido.");
                 leer.next();
             }
         } while (!eficienciaValida);
 
         pokebolas.add(new Pokeball(color, serie, eficiencia));
+    }
+
+    private static void listarPokemonPorTipo() {
+        System.out.println("Lista de Pokemon agrupados por tipo:\n");
+        for (int i = 0; i < pokemones.size(); i++) {
+            Pokemon pokemon = pokemones.get(i);
+            int posicion = i + 1;
+            if (pokemon instanceof FireType) {
+                System.out.println("\nFire-Type -> \n" + posicion + ")." + ": " + pokemon);
+            } else if (pokemon instanceof WaterType) {
+                System.out.println("\nWater-Type -> \n" + posicion + ")." + ": " + pokemon);
+            } else if (pokemon instanceof GrassType) {
+                System.out.println("\nGrass-Type -> \n" + posicion + ")." + ": " + pokemon);
+            }
+        }
     }
 }
