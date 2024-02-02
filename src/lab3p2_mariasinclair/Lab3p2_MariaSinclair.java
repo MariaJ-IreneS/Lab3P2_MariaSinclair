@@ -7,6 +7,7 @@ public class Lab3p2_MariaSinclair {
 
     static Scanner leer = new Scanner(System.in);
     static ArrayList<Pokemon> pokemones = new ArrayList<>();
+    static ArrayList<Pokeball> pokebolas = new ArrayList<>();
 
     public static void main(String[] args) {
         int caso = 0;
@@ -29,7 +30,7 @@ public class Lab3p2_MariaSinclair {
                     break;
 
                 case 2:
-
+                    crearPokebola(pokebolas);
                     break;
 
                 case 3:
@@ -121,4 +122,33 @@ public class Lab3p2_MariaSinclair {
         System.out.println("Pokemon agregado con exito :) ");
     }
 
+    public static void crearPokebola(ArrayList<Pokeball> pokebolas) {
+        System.out.print("Color de la Pokebola: ");
+        String color = leer.next();
+
+        System.out.print("Numero de serie de la Pokebola: ");
+        int serie = leer.nextInt();
+
+        int eficiencia = 0;
+        boolean eficienciaValida = false;
+
+        do {
+            System.out.print("Eficiencia de la Pokebola (entre 1 y 3): ");
+
+            if (leer.hasNextInt()) {
+                eficiencia = leer.nextInt();
+
+                if (eficiencia >= 1 && eficiencia <= 3) {
+                    eficienciaValida = true;
+                } else {
+                    System.out.println("La eficiencia debe estar entre 1 y 3. Intente nuevamente.");
+                }
+            } else {
+                System.out.println("Ingrese un número valido.");
+                leer.next();
+            }
+        } while (!eficienciaValida);
+
+        pokebolas.add(new Pokeball(color, serie, eficiencia));
+    }
 }
