@@ -3,12 +3,12 @@ package lab3p2_mariasinclair;
 public class GrassType extends Pokemon {
 
     private String habitad;
-    private int dominio; //validar entre 0 a 100
+    private int dominio; //validar entre 0 a 100***
 
     public GrassType(String nombre, int entrada, String cadena, boolean atrapado, String habitad, int dominio) {
         super(nombre, entrada, cadena, atrapado);
         this.habitad = habitad;
-        this.dominio = dominio;
+        setDominio(dominio);
     }
 
     public String getHabitad() {

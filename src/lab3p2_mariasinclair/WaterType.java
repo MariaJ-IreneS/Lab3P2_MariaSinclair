@@ -1,14 +1,14 @@
 package lab3p2_mariasinclair;
 
-public class WaterType extends Pokemon{
-    
+public class WaterType extends Pokemon {
+
     private boolean vivir; // vivir en agua o no
     private int rapidez;
 
-    public WaterType(String nombre, int entrada, String cadena, boolean atrapado, Pokeball mostrar, boolean vivir, int rapidez) {
+    public WaterType(String nombre, int entrada, String cadena, boolean atrapado, boolean vivir, int rapidez) {
         super(nombre, entrada, cadena, atrapado);
-        this.vivir=false;
-        this.rapidez=rapidez;
+        this.vivir = false;
+        this.rapidez = rapidez;
     }
 
     public boolean isVivir() {
@@ -44,7 +44,11 @@ public class WaterType extends Pokemon{
     }
 
     public void setRapidez(int rapidez) {
-        this.rapidez = rapidez;
+        if (!this.vivir) {
+            this.vivir = vivir;
+        } else {
+            System.out.println("No puede vivir.");
+        }
     }
 
     public void setNombre(String nombre) {
@@ -64,14 +68,12 @@ public class WaterType extends Pokemon{
     }
 
     public void setMostrar(Pokeball pokebola) {
-        this.pokebola= pokebola;
+        this.pokebola = pokebola;
     }
 
     @Override
     public String toString() {
         return "WaterType:\n" + "\nVivir=" + vivir + "\nRapidez=" + rapidez;
     }
-    
-    
-    
+
 }

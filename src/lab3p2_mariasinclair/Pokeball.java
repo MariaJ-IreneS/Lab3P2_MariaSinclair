@@ -9,7 +9,7 @@ public class Pokeball {
     public Pokeball(String color, int serie, int eficiencia) {
         this.color = color;
         this.serie = serie;
-        this.eficiencia = eficiencia;
+        setEficiencia(eficiencia);
     }
 
     public String getColor() {
