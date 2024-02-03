@@ -38,7 +38,7 @@ public class Lab3p2_MariaSinclair {
                     break;
 
                 case 4:
-
+                    eliminarPorTipo();
                     break;
 
                 case 5:
@@ -163,6 +163,107 @@ public class Lab3p2_MariaSinclair {
                 System.out.println("\nWater-Type -> \n" + posicion + ")." + ": " + pokemon);
             } else if (pokemon instanceof GrassType) {
                 System.out.println("\nGrass-Type -> \n" + posicion + ")." + ": " + pokemon);
+            }
+        }
+    }
+
+    private static void eliminarPorTipo() {
+        System.out.println("Eliminar Pokemon por Tipo:");
+        System.out.println("1. Fire-Type");
+        System.out.println("2. Water-Type");
+        System.out.println("3. Grass-Type");
+
+        int opcionTipo;
+
+        while (true) {
+            System.out.print("Seleccione el tipo de Pokemon que desea eliminar (1-3): ");
+
+            if (leer.hasNextInt()) {
+                opcionTipo = leer.nextInt();
+                leer.nextLine();
+
+                if (opcionTipo >= 1 && opcionTipo <= 3) {
+                    break;
+                } else {
+                    System.out.println("Por favor, ingrese una opción valida (1-3).");
+                }
+            } else {
+                System.out.println("Por favor, ingrese un numero entero.");
+                leer.nextLine();  // Limpiar el buffer de entrada
+            }
+        }
+
+        String tipoPokemon = null;
+
+        switch (opcionTipo) {
+            case 1:
+                tipoPokemon = "Fire-Type";
+                break;
+            case 2:
+                tipoPokemon = "Water-Type";
+                break;
+            case 3:
+                tipoPokemon = "Grass-Type";
+                break;
+            default:
+                System.out.println("Opcion no valida. Volviendo al menu principal.");
+                return;
+        }
+
+        // Mostrar lista de Pokemon del tipo seleccionado
+        System.out.println("\nLista de Pokemon " + tipoPokemon + " para eliminar:\n");
+
+        int indice = 1;
+
+        for (int i = 0; i < pokemones.size(); i++) {
+            Pokemon pokemon = pokemones.get(i);
+
+            if ((opcionTipo == 1 && pokemon instanceof FireType)
+                    || (opcionTipo == 2 && pokemon instanceof WaterType)
+                    || (opcionTipo == 3 && pokemon instanceof GrassType)) {
+                System.out.println(indice + ". " + pokemon);
+                indice++;
+            }
+        }
+
+        if (indice == 1) {
+            System.out.println("No hay Pokemon de tipo " + tipoPokemon + " en la lista.");
+            return;
+        }
+
+        int indiceEliminar;
+        while (true) {
+            System.out.print("Ingrese el numero del Pokemon que desea eliminar: ");
+
+            if (leer.hasNextInt()) {
+                indiceEliminar = leer.nextInt();
+                leer.nextLine();  
+
+                if (indiceEliminar >= 1 && indiceEliminar < indice) {
+                    break;
+                } else {
+                    System.out.println("Por favor, ingrese un indice valido (1-" + (indice - 1) + ").");
+                }
+            } else {
+                System.out.println("Por favor, ingrese un numero entero.");
+                leer.nextLine();
+            }
+        }
+
+        // Eliminar el Pokémon seleccionado
+        int contador = 1;
+        for (int i = 0; i < pokemones.size(); i++) {
+            Pokemon pokemon = pokemones.get(i);
+
+            if ((opcionTipo == 1 && pokemon instanceof FireType)
+                    || (opcionTipo == 2 && pokemon instanceof WaterType)
+                    || (opcionTipo == 3 && pokemon instanceof GrassType)) {
+                if (contador == indiceEliminar) {
+                    pokemones.remove(i);
+                    System.out.println("Pokemon eliminado con exito.");
+                    break;
+                }
+                contador++;
             }
         }
     }
