@@ -43,11 +43,11 @@ public class Lab3p2_MariaSinclair {
                     break;
 
                 case 5:
-                    encuentroPokemon(pokebolas);
+                    Capturar(pokebolas);
                     break;
 
                 case 6:
-
+                    Modificar(pokemones);
                     break;
 
                 default:
@@ -269,7 +269,7 @@ public class Lab3p2_MariaSinclair {
         }
     }
 
-    private static void encuentroPokemon(ArrayList<Pokeball> pokebolas) {
+    private static void Capturar(ArrayList<Pokeball> pokebolas) {
         if (pokebolas.isEmpty()) {
             System.out.println("No hay pokebolas disponibles.");
             return;
@@ -370,6 +370,107 @@ public class Lab3p2_MariaSinclair {
             System.out.println("No has logrado atrapar a " + pokemonEncontrado.getNombre() + ".");
             pokebolas.remove(pokebolaElegida);
         }
+    }
+
+    private static void Modificar(ArrayList<Pokemon> pokemones) {
+        // Mostrar la lista de pokemones atrapados
+        System.out.println("Lista de Pokemon atrapados:\n");
+
+        for (int i = 0; i < pokemones.size(); i++) {
+            Pokemon pokemon = pokemones.get(i);
+            if (pokemon.isAtrapado()) {
+                System.out.println((i + 1) + ". " + pokemon);
+            }
+        }
+
+        // Verificar si hay pokemones atrapados
+        boolean hayPokemonAtrapado = false;
+
+        for (Pokemon pokemon : pokemones) {
+            if (pokemon.isAtrapado()) {
+                hayPokemonAtrapado = true;
+                break;
+            }
+        }
+
+        if (!hayPokemonAtrapado) {
+            System.out.println("No hay Pokemon atrapados para modificar.");
+            return;
+        }
+
+        // Pedir al usuario que elija un Pokémon atrapado
+        int indicePokemon;
+
+        while (true) {
+            System.out.print("Seleccione el numero del Pokemon que desea modificar (1-" + pokemones.size() + "): ");
+
+            if (leer.hasNextInt()) {
+                indicePokemon = leer.nextInt();
+                leer.nextLine();
+
+                if (indicePokemon >= 1 && indicePokemon <= pokemones.size() && pokemones.get(indicePokemon - 1).isAtrapado()) {
+                    break;
+                } else {
+                    System.out.println("Por favor, ingrese un numero valido de Pokemon atrapado.");
+                }
+            } else {
+                System.out.println("Por favor, ingrese un numero entero.");
+                leer.nextLine();
+            }
+        }
+
+        Pokemon pokemonSeleccionado = pokemones.get(indicePokemon - 1);
+        System.out.println("\nElija que atributos desea modificar para " + pokemonSeleccionado.getNombre() + ":");
+        System.out.println("1. Nombre");
+        System.out.println("2. Numero de Entrada en la Pokedex");
+        System.out.println("3. Naturaleza (Timido, Energetico, Misterioso)");
+        System.out.println("Opcion: ");
+        int opcionAtributo = leer.nextInt();
+        leer.nextLine();
+
+        // Modificar el atributo seleccionado
+        switch (opcionAtributo) {
+            case 1:
+                System.out.print("Nuevo Nombre: ");
+                String nuevaNombre = leer.nextLine();
+                pokemonSeleccionado.setNombre(nuevaNombre);
+                break;
+            case 2:
+                System.out.print("Nuevo Numero de Entrada en la Pokedex: ");
+                int nuevaEntrada = leer.nextInt();
+                pokemonSeleccionado.setEntrada(nuevaEntrada);
+                leer.nextLine();  
+                break;
+            case 3:
+                System.out.print("Ingrese la nueva Naturaleza (Timido, Energetico, Misterioso): ");
+                String nuevaCadena = leer.nextLine();
+                pokemonSeleccionado.setCadena(nuevaCadena);
+                break;
+            default:
+                System.out.println("Opción no valida.");
+        }
+
+        if (pokemonSeleccionado instanceof GrassType) {
+            System.out.print("Ingrese el nuevo valor para el habitat: ");
+            String nuevoHabitat = leer.nextLine();
+            ((GrassType) pokemonSeleccionado).setHabitad(nuevoHabitat);
+        }
+
+        if (pokemonSeleccionado instanceof FireType) {
+            System.out.print("Ingrese el nuevo valor para la potencia de llamas: ");
+            int nuevaPotencia = leer.nextInt();
+            leer.nextLine();
+            ((FireType) pokemonSeleccionado).setPotencia(nuevaPotencia);
+        }
+
+        if (pokemonSeleccionado instanceof WaterType) {
+            System.out.print("Puede vivir fuera del agua (true): ");
+            boolean puedeVivirFueraDelAgua = leer.nextBoolean();
+            leer.nextLine();
+            ((WaterType) pokemonSeleccionado).setVivir(puedeVivirFueraDelAgua);
+        }
+
+        System.out.println("Atributos modificados con exito: " + pokemonSeleccionado);
     }
 
 }
