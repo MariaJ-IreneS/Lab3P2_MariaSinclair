@@ -52,12 +52,12 @@ public class Lab3p2_MariaSinclair {
 
                 default:
                     System.out.println("El programa ha finalizado.");
+                    System.out.println("El programador renuncia formalmente a su trabajo el dia de hoy :(");
                     break;
             }
         }
 
     }//Fin del Main.
-
     private static void crearPokemon() {
         System.out.println("Elija el tipo de Pokemon:");
         System.out.println("1. Fire-Type");
