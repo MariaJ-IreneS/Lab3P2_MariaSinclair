@@ -1,6 +1,7 @@
 package lab3p2_mariasinclair;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Lab3p2_MariaSinclair {
@@ -42,7 +43,7 @@ public class Lab3p2_MariaSinclair {
                     break;
 
                 case 5:
-
+                    encuentroPokemon(pokebolas);
                     break;
 
                 case 6:
@@ -189,7 +190,7 @@ public class Lab3p2_MariaSinclair {
                 }
             } else {
                 System.out.println("Por favor, ingrese un numero entero.");
-                leer.nextLine();  // Limpiar el buffer de entrada
+                leer.nextLine();
             }
         }
 
@@ -206,7 +207,7 @@ public class Lab3p2_MariaSinclair {
                 tipoPokemon = "Grass-Type";
                 break;
             default:
-                System.out.println("Opcion no valida. Volviendo al menu principal.");
+                System.out.println("Opcion no valida.");
                 return;
         }
 
@@ -237,7 +238,7 @@ public class Lab3p2_MariaSinclair {
 
             if (leer.hasNextInt()) {
                 indiceEliminar = leer.nextInt();
-                leer.nextLine();  
+                leer.nextLine();
 
                 if (indiceEliminar >= 1 && indiceEliminar < indice) {
                     break;
@@ -250,7 +251,7 @@ public class Lab3p2_MariaSinclair {
             }
         }
 
-        // Eliminar el Pokémon seleccionado
+        // Eliminar el Pokemon seleccionado
         int contador = 1;
         for (int i = 0; i < pokemones.size(); i++) {
             Pokemon pokemon = pokemones.get(i);
@@ -267,4 +268,108 @@ public class Lab3p2_MariaSinclair {
             }
         }
     }
+
+    private static void encuentroPokemon(ArrayList<Pokeball> pokebolas) {
+        if (pokebolas.isEmpty()) {
+            System.out.println("No hay pokebolas disponibles.");
+            return;
+        }
+
+        // Mostrar pokebolas disponibles
+        System.out.println("Pokebolas disponibles: ");
+        for (int i = 0; i < pokebolas.size(); i++) {
+            System.out.println((i + 1) + ". " + pokebolas.get(i));
+        }
+
+        // Pedir al usuario que elija una pokebola
+        int opcionPokebola;
+
+        while (true) {
+            System.out.print("Seleccione una pokebola para el encuentro (1-" + pokebolas.size() + "): ");
+
+            if (leer.hasNextInt()) {
+                opcionPokebola = leer.nextInt();
+                leer.nextLine();
+
+                if (opcionPokebola >= 1 && opcionPokebola <= pokebolas.size()) {
+                    break;
+                } else {
+                    System.out.println("Por favor, ingrese una opcion valida.");
+                }
+            } else {
+                System.out.println("Por favor, ingrese un numero entero.");
+                leer.nextLine();
+            }
+        }
+
+        Pokeball pokebolaElegida = pokebolas.get(opcionPokebola - 1);
+
+        // Seleccionar un pokemon aleatorio no atrapado
+        Random random = new Random();
+        Pokemon pokemonEncontrado = null;
+
+        for (Pokemon pokemon : pokemones) {
+            if (!pokemon.isAtrapado()) {
+                pokemonEncontrado = pokemon;
+                break;
+            }
+        }
+
+        if (pokemonEncontrado == null) {
+            System.out.println("Todos los pokemon ya han sido atrapados.");
+            return;
+        }
+
+        System.out.println("Ha aparecido el Pokemon " + pokemonEncontrado.getNombre());
+        System.out.print("Utilizar pokebola para capturar (1) o huir (2): ");
+
+        int opcionAccion;
+
+        while (true) {
+            if (leer.hasNextInt()) {
+                opcionAccion = leer.nextInt();
+                leer.nextLine();
+
+                if (opcionAccion == 1 || opcionAccion == 2) {
+                    break;
+                } else {
+                    System.out.println("Por favor, ingrese una opcion valida (1 o 2).");
+                }
+            } else {
+                System.out.println("Por favor, ingrese un numero entero.");
+                leer.nextLine();  // Limpiar el buffer de entrada
+            }
+        }
+
+        if (opcionAccion == 2) {
+            System.out.println("Has decidido huir :");
+            return;
+        }
+
+        // Intento de captura
+        int Atrapar = 0;
+
+        switch (pokebolaElegida.getEficiencia()) {
+            case 3:
+                Atrapar = 1;
+                break;
+            case 2:
+                Atrapar = 2 / 3;
+                break;
+            case 1:
+                Atrapar = 1 / 3;
+                break;
+        }
+
+        if (random.nextDouble() < Atrapar) {
+            System.out.println("Has capturado a " + pokemonEncontrado.getNombre() + " con exito :*)");
+            pokemonEncontrado.setAtrapado(true);
+            pokemonEncontrado.setPokebola(pokebolaElegida);
+            pokebolas.remove(pokebolaElegida);
+        } else {
+            System.out.println("No has logrado atrapar a " + pokemonEncontrado.getNombre() + ".");
+            pokebolas.remove(pokebolaElegida);
+        }
+    }
+
 }

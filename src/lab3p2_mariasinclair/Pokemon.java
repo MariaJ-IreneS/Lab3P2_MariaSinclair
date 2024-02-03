@@ -27,6 +27,11 @@ public class Pokemon {
         return cadena;
     }
 
+    public boolean isAtrapado() {
+        return atrapado;
+    }
+
+    
     public void setAtrapado(boolean atrapado, Pokeball pokebola) {
         if (!this.atrapado) {
             this.atrapado = atrapado;
@@ -55,6 +60,15 @@ public class Pokemon {
     public void setAtrapado(boolean atrapado) {
         this.atrapado = atrapado;
     }
+
+    public void setPokebola(Pokeball pokebola) {
+        this.pokebola = pokebola;
+    }
+
+    public Pokeball getPokebola() {
+        return pokebola;
+    }
+    
 
     @Override
     public String toString() {
